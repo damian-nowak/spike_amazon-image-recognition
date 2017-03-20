@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Amazon Recognition</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+</head>
+
+<body ng-app="mainModule">
+    <div class='container-fluid'>
+        <h1>Files Data Recognition</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div ng-controller="fileList" class="col-md-3">
+                <h3>File List</h3>
+                <ul ng-repeat="file in fileList" class='list-group text-center'>
+                    <li ng-click="isShowableTag = !isShowableTag; " class="list-group-item block-center"><a ng-show="isShowableTag" href="">{{ file.name }}</a><img ng-hide="isShowableTag" class="img-responsive"
+                            src='images/{{ file.name }}' alt="{{ file.name }}"></li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div ng-controller="recognizedFile" class="col-md-6" style="background-color:white;">
+                <h2>Recognized data</h2>
+                <table class="table">
+                    <th ng-click="orderByTableHeader('Confidence')">Confidence</th>
+                    <th ng-click="orderByTableHeader('Name')">Name</th>
+                    <tr ng-repeat="recognized in recognizedData.Labels | orderBy:tableHeader">
+                        <td ng-show="{{ recognized.Confidence > 90 }}">{{ recognized.Name }}</td>
+                        <td ng-show="{{ recognized.Confidence > 90 }}">{{ recognized.Confidence }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/javascripts/mainModule.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/recognizedFile.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/fileList.js"></script>
+</body>
+
+</html>
