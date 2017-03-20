@@ -5,9 +5,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    links:
+      - mongo
     ports:
       - 3000:3000
     volumes:
       - .:/project
-    working_dir: /project
     stdin_open: true
+  mongo:  
+    image: mongo
+    ports:
+      - "27017:27017"
