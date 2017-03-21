@@ -21,7 +21,7 @@
                 <ul ng-repeat="file in fileList" class='list-group text-center'>
                     <li ng-click="isShowableTag = !isShowableTag; sendFileName(this)" class="list-group-item block-center">
                         <a ng-show="isShowableTag" href="">{{ file.fileName }} </a>
-                        <span ng-click="removeFile($index)" class='close'>×</span>
+                        <span ng-click="removeFile(this)" class='close'>×</span>
                         <img ng-hide="isShowableTag" class="img-responsive" src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
                     </li>
                 </ul>
