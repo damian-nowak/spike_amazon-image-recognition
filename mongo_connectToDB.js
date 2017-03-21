@@ -2,8 +2,14 @@
 
 var {MongoClient} = require('mongodb');
 
+if (process.env.DOCKER === 'true'){
+  var url = 'mongodb://mongo:27017/RekognitionLabels';
+} else {
+  var url = 'mongodb://localhost:27017/RekognitionLabels';
+};
+
 var findAllInDB = () => {
-  return MongoClient.connect('mongodb://mongo:27017/RekognitionLabels')
+  return MongoClient.connect(url)
   .then((db) => {
     var searchResult = db.collection('RekognitionLabels').find().toArray();
     db.close();
@@ -18,7 +24,7 @@ var findAllInDB = () => {
 };
 
 var findOneInDB = (file) => {
-  return MongoClient.connect('mongodb://mongo:27017/RekognitionLabels')
+  return MongoClient.connect(url)
   .then((db) => {
     var searchResult = db.collection('RekognitionLabels').find({fileName: file}).toArray();
     db.close();
