@@ -14,24 +14,27 @@
     <div class='container-fluid'>
         <h1>Files Data Recognition</h1>
         <hr>
-        <div class="row">
+        <div ng-controller="fileList" class="row">
             <div class="col-md-1"></div>
-            <div ng-controller="fileList" class="col-md-3">
+            <div class="col-md-3">
                 <h3>File List</h3>
                 <ul ng-repeat="file in fileList" class='list-group text-center'>
-                    <li ng-click="isShowableTag = !isShowableTag; " class="list-group-item block-center"><a ng-show="isShowableTag" href="">{{ file.name }}</a><img ng-hide="isShowableTag" class="img-responsive"
-                            src='images/{{ file.name }}' alt="{{ file.name }}"></li>
+                    <li ng-click="isShowableTag = !isShowableTag; sendFileName(this)" class="list-group-item block-center">
+                        <a ng-show="isShowableTag" href="">{{ file.fileName }} </a>
+                        <span ng-click="removeFile($index)" class='close'>×</span>
+                        <img ng-hide="isShowableTag" class="img-responsive" src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
+                    </li>
                 </ul>
             </div>
-            <div class="col-md-1"></div>
-            <div ng-controller="recognizedFile" class="col-md-6" style="background-color:white;">
+            <div class="col-md-1"></div>      
+            <div class="col-md-6" style="background-color:white;">
                 <h2>Recognized data</h2>
                 <table class="table">
-                    <th ng-click="orderByTableHeader('Confidence')">Confidence</th>
                     <th ng-click="orderByTableHeader('Name')">Name</th>
-                    <tr ng-repeat="recognized in recognizedData.Labels | orderBy:tableHeader">
-                        <td ng-show="{{ recognized.Confidence > 90 }}">{{ recognized.Name }}</td>
-                        <td ng-show="{{ recognized.Confidence > 90 }}">{{ recognized.Confidence }}</td>
+                    <th ng-click="orderByTableHeader('Confidence')">Confidence</th>
+                    <tr ng-repeat="recognized in recognizedData | orderBy:tableHeader:true">
+                        <td>{{ recognized.Name }}</td>
+                        <td>{{ recognized.Confidence }}</td>
                     </tr>
                 </table>
             </div>
@@ -39,7 +42,6 @@
         </div>
     </div>
     <script type="text/javascript" src="/javascripts/mainModule.js"></script>
-    <script type="text/javascript" src="/javascripts/controllers/recognizedFile.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/fileList.js"></script>
 </body>
 
