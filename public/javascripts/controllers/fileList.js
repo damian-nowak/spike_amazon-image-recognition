@@ -12,8 +12,6 @@ mainModule.controller('fileList', function($scope, $http){
 
     $scope.removeFile = function(item){
         $scope.fileList.splice(item,1);
-        //todo usuwanie z bazy delete -> http://localhost:3000/api/
-        //console.log(item.file.fileName);
         $http.delete('http://localhost:3000/api/'+item.file.fileName);
     }
 
