@@ -38,7 +38,24 @@ var findOneInDB = (file) => {
   });
 };
 
+var findAndDeleteOneInDB = (file) => {
+  return MongoClient.connect(url)
+  .then((db) => {
+    var deleteResult = db.collection('RekognitionLabels').findOneAndDelete({fileName: file});
+    db.close();
+    return deleteResult;
+  })
+  .then((data) => {
+    return data;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+};
+
 module.exports = {
   findAllInDB,
-  findOneInDB
+  findOneInDB,
+  findAndDeleteOneInDB
 }
+
