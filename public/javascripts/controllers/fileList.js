@@ -19,19 +19,9 @@ mainModule.controller('fileList', function($scope, $http){
         $scope.tableHeader = x;
     }
 
-    
-    //$scope.fileId = false;
-
     $scope.idChecker = function(file){
         $scope.fileId = file.$id;
         console.log($scope.fileId);      
-        // if(this.$id == $scope.fileId){
-        //     console.log(true);
-        //     //return true;
-        // } else {
-        //     console.log(false);
-        //     //return false;
-        // }
     }
 
     $scope.isValidId = function(id){
@@ -41,5 +31,4 @@ mainModule.controller('fileList', function($scope, $http){
             return false;
         }
     }
-
 });
