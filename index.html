@@ -14,11 +14,12 @@
     <div class='container-fluid'>
         <h1>Files Data Recognition</h1>
         <hr>
-        <form method="POST" action="http://localhost:3000/api/" class="form-group">
-            <input type="file" name="fileName">
-            <input type="submit" class="btn btn-default">
-        </form>
+        <div ng-controller="fileUploader">
+            <input type="file" file-model="loadedFile">
+            <button ng-click="uploadFile()">upload file</button>
+        </div>    
         <hr>
+        
         <div ng-controller="fileList" class="row">
             <div class="col-md-1"></div>
             <div class="col-md-3">
@@ -48,7 +49,9 @@
     </div>
     <script type="text/javascript" src="/javascripts/mainModule.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/fileList.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/uploadFile.js"></script>
+    <script type="text/javascript" src="/javascripts/directives/fileModel.js"></script>
+    <script type="text/javascript" src="/javascripts/services/fileUpload.js"></script>
 </body>
 
 </html>
