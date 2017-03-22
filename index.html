@@ -25,7 +25,7 @@
                 <h3>File List</h3>
                 <ul ng-repeat="file in fileList" class='list-group text-center'>
                     <li ng-click="sendFileName(this);idChecker(this)" class="list-group-item block-center">
-                        <a ng-show="isShowableTag" href="">{{ file.fileName }} </a>
+                        {{ file.fileName }}
                         <span ng-click="removeFile(this)" class='close'>×</span>
                         <img ng-show="isValidId(this)" class="img-responsive" src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
                     </li>
@@ -48,6 +48,7 @@
     </div>
     <script type="text/javascript" src="/javascripts/mainModule.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/fileList.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 </body>
 
 </html>
