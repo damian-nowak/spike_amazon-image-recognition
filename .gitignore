@@ -1,3 +1,4 @@
 src/node_modules
 src/public/images
 src/npm-debug.log
+src/rekognition.js
