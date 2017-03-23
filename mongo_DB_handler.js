@@ -22,6 +22,7 @@ var findAllInDB = () => {
     })
     .catch((error) => {
       console.log(error);
+      return error;
     });
 };
 
@@ -39,6 +40,7 @@ var findOneInDB = (file) => {
     })
     .catch((error) => {
       console.log(error);
+      return error;
     });
 };
 
@@ -56,6 +58,7 @@ var findAndDeleteOneInDB = (file) => {
     })
     .catch((error) => {
       console.log(error);
+      return error;
     });
 };
 
@@ -74,6 +77,7 @@ var insertOneIntoDB = (file, data) => {
     })
     .catch((error) => {
       console.log(error);
+      return error;
     });
 };
 
