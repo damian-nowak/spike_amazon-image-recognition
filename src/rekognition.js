@@ -4,8 +4,8 @@ var AWS = require('aws-sdk');
 // setup for AWS Rekognition
 var rekognition = new AWS.Rekognition({
   region: 'eu-west-1',
-  // uncomment line below and insert creds from process.env
-  // credentials: new AWS.Credentials(, ),
+  // uncomment line below and insert your AWS credentials
+  // credentials: new AWS.Credentials('AWS_ACCESS_KEY', 'AWS_SECRET_KEY'),
 });
 
 var getLabels = (filePath) => {
