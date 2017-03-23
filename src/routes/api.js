@@ -39,7 +39,7 @@ router.delete('/:fileName', function (req, res, next) {
 });
 
 /*POST one file */
-router.post('/upload', utility.upload.single('image'), function (req, res, next) {
+router.post('/upload', utility.upload.single('file'), function (req, res, next) {
   console.log(req.file);
 
   rekognition.getLabels(req.file.path)
