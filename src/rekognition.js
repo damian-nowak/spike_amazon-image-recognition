@@ -4,7 +4,7 @@ var AWS = require('aws-sdk');
 // setup for AWS Rekognition
 var rekognition = new AWS.Rekognition({
   region: 'eu-west-1',
-  // below insert creds from process.env
+  // uncomment line below and insert creds from process.env
   // credentials: new AWS.Credentials(, ),
 });
 

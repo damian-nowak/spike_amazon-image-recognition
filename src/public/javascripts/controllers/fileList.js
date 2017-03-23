@@ -11,7 +11,7 @@ mainModule.controller('fileList', function($scope, $http){
     }
 
     $scope.removeFile = function(item){
-        $scope.fileList.splice(item,1);
+        $scope.fileList.splice(item.$index,1);
         $http.delete('http://localhost:3000/api/'+item.file.fileName);
     }
 
