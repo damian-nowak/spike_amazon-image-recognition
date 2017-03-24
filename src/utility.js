@@ -1,4 +1,5 @@
 var multer = require('multer');
+var fs = require('fs');
 
 // file upload 
 var dest = __dirname + '/public/images/';
@@ -12,8 +13,18 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
+var upload = multer({
+  storage: storage
+})
+
+var file_delete = (fileName) => {
+  fs.unlink('./public/images' + fileName, function (err) {
+    if (err) return console.log(err);
+    console.log('file deleted successfully');
+  })
+};
 
 module.exports = {
-  upload
+  upload,
+  file_delete
 };

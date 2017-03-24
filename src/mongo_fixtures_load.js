@@ -4,8 +4,14 @@ var {
   MongoClient
 } = require('mongodb');
 
+if (process.env.DOCKER === 'true') {
+  var url = 'mongodb://mongo:27017/RekognitionLabels';
+} else {
+  var url = url;
+};
+
 var input_1_DB = () => {
-  return MongoClient.connect('mongodb://localhost:27017/RekognitionLabels')
+  return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
         fileName: 'file1.jpg',
@@ -55,7 +61,7 @@ var input_1_DB = () => {
 };
 
 var input_2_DB = () => {
-  return MongoClient.connect('mongodb://localhost:27017/RekognitionLabels')
+  return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
         fileName: 'file2.jpg',
@@ -82,7 +88,7 @@ var input_2_DB = () => {
 };
 
 var input_3_DB = () => {
-  return MongoClient.connect('mongodb://localhost:27017/RekognitionLabels')
+  return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
         fileName: 'file3.jpg',
@@ -115,7 +121,7 @@ var input_3_DB = () => {
 };
 
 var input_4_DB = () => {
-  return MongoClient.connect('mongodb://localhost:27017/RekognitionLabels')
+  return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
         fileName: 'file4.jpg',
@@ -160,7 +166,7 @@ var input_4_DB = () => {
 };
 
 var input_5_DB = () => {
-  return MongoClient.connect('mongodb://localhost:27017/RekognitionLabels')
+  return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
         fileName: 'file5.jpg',

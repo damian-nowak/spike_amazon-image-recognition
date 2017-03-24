@@ -29,6 +29,7 @@ router.get('/:fileName', function (req, res, next) {
 
 /* DELETE one file */
 router.delete('/:fileName', function (req, res, next) {
+  utility.file_delete(req.path);
   mongoDB.findAndDeleteOneInDB(req.params.fileName)
     .then((data) => {
       res.json(data);
@@ -40,17 +41,12 @@ router.delete('/:fileName', function (req, res, next) {
 
 /*POST one file */
 router.post('/upload', utility.upload.single('file'), function (req, res, next) {
-  console.log(req.file);
-
   rekognition.getLabels(req.file.path)
     .then((data) => {
-      mongoDB.insertOneIntoDB(req.file.filename, data)
-        .then((data) => {
-          res.json(data);
-        })
-        .catch((err) => {
-          res.render('error');
-        });
+      return mongoDB.insertOneIntoDB(req.file.filename, data);
+    })
+    .then((data) => {
+      res.json(data);
     })
     .catch((err) => {
       res.render('error');
