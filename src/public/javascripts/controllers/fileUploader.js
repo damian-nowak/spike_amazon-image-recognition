@@ -1,5 +1,8 @@
+'use strict';
 mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', function (Upload, $window, $scope, $http) {
     
+    $scope.tmpMessage = false;
+
     var vm = this;
     vm.submit = function () {
         if (vm.upload_form.file.$valid && vm.file) {
@@ -7,10 +10,12 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
         }
     }
     vm.upload = function (file) {
+        $scope.tmpMessage = true;
         Upload.upload({
             url: 'http://localhost:3000/api/upload',
             data: { file: file }
         }).then(function (response) {
+            $scope.tmpMessage = false;
             $scope.loadFilesList();
         });
     };
