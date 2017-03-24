@@ -11,18 +11,18 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
             url: 'http://localhost:3000/api/upload',
             data: { file: file }
         }).then(function (response) {
-            $http.get('http://localhost:3000/api')
-                .then(function (response) {
-                    $scope.fileList = response.data;
-                });
+            $scope.loadFilesList();
         });
     };
 
-
-    $http.get('http://localhost:3000/api')
+    $scope.loadFilesList = function(){
+        $http.get('http://localhost:3000/api')
         .then(function (response) {
             $scope.fileList = response.data;
         });
+    }
+
+    $scope.loadFilesList();
 
     $scope.isShowableTag = true;
 
