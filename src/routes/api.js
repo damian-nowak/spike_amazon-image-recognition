@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var mongoDB = require('./../mongo_DB_handler');
+var mongoDB = require('./../RekognitionLabelsRepository');
 var utility = require('../utility');
 var rekognition = require('../rekognition');
 
-
-/* GET all files */
+/* GET all documents from DB */
 router.get('/', function (req, res, next) {
-  mongoDB.findAllInDB()
+  mongoDB.getAllLabels()
     .then((data) => {
       res.json(data);
     })
@@ -16,9 +15,9 @@ router.get('/', function (req, res, next) {
     });
 });
 
-/* GET one file */
+/* GET one document from DB */
 router.get('/:fileName', function (req, res, next) {
-  mongoDB.findOneInDB(req.params.fileName)
+  mongoDB.getLabels(req.params.fileName)
     .then((data) => {
       res.json(data);
     })
@@ -27,23 +26,25 @@ router.get('/:fileName', function (req, res, next) {
     });
 });
 
-/* DELETE one file */
+/* DELETE one document from DB and storage */
 router.delete('/:fileName', function (req, res, next) {
-  utility.file_delete(req.path);
-  mongoDB.findAndDeleteOneInDB(req.params.fileName)
+  mongoDB.deleteLabels(req.params.fileName)
     .then((data) => {
       res.json(data);
+    })
+    .then(() => {
+      return utility.fileDelete(req.path);
     })
     .catch((err) => {
       res.render('error');
     });
 });
 
-/*POST one file */
+/* POST one document */
 router.post('/upload', utility.upload.single('file'), function (req, res, next) {
   rekognition.getLabels(req.file.path)
     .then((data) => {
-      return mongoDB.insertOneIntoDB(req.file.filename, data);
+      return mongoDB.addLabels(req.file.filename, data);
     })
     .then((data) => {
       res.json(data);
