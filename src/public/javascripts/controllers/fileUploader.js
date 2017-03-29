@@ -1,7 +1,7 @@
 'use strict';
 mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', function fileAdd(Upload, $window, $scope, $http) {
     $scope.tmpMessage = false;
-    $scope.isShowableTag = true;
+    var vm = this;
 
     $scope.loadFilesList = function(){
         $http.get('http://localhost:3000/api')
@@ -10,10 +10,9 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
         });    
     }
 
-    var vm = this;
     vm.submit = function () {
         if (vm.upload_form.file.$valid && vm.file) {
-            vm.upload(vm.file);
+            vm.upload(vm.file);  
         }
     }
     
@@ -24,7 +23,8 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
             data: { file: file }
         }).then(function (response) {
             $scope.tmpMessage = false;
-            $scope.loadFilesList();
+            $scope.loadFilesList(); 
+            delete vm.file;
         });
     };
 

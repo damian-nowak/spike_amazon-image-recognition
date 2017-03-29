@@ -34,20 +34,17 @@
                 <p>{{up.progress}}
             </form>
             <span  ng-if="tmpMessage">waiting for recognition...</span>
-
         </div>
     </div>
-
-
-    
     <hr>
+
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-3">
             <h3>File List</h3>
             <ul ng-repeat="file in fileList" class='list-group text-center'>
                 <li ng-click="sendFileName(this);idChecker(this)" class="list-group-item block-center">
-                    <a ng-show="isShowableTag" href="">{{ file.fileName }} </a>
+                    <a href="">{{ file.fileName }} </a>
                     <span ng-click="removeFile(this)" class='close'>×</span>
                     <img ng-show="isValidId(this)" class="img-responsive" src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
                 </li>
