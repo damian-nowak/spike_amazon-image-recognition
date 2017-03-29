@@ -1,7 +1,14 @@
 'use strict';
-mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', function (Upload, $window, $scope, $http) {
-    
+mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', function fileAdd(Upload, $window, $scope, $http) {
     $scope.tmpMessage = false;
+    $scope.isShowableTag = true;
+
+    $scope.loadFilesList = function(){
+        $http.get('http://localhost:3000/api')
+        .then(function (response) {
+            $scope.fileList = response.data;     
+        });    
+    }
 
     var vm = this;
     vm.submit = function () {
@@ -9,6 +16,7 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
             vm.upload(vm.file);
         }
     }
+    
     vm.upload = function (file) {
         $scope.tmpMessage = true;
         Upload.upload({
@@ -20,20 +28,13 @@ mainModule.controller('fileAdd', ['Upload', '$window', '$scope', '$http', functi
         });
     };
 
-    $scope.loadFilesList = function(){
-        $http.get('http://localhost:3000/api')
-        .then(function (response) {
-            $scope.fileList = response.data;
-        });
-    }
-
     $scope.loadFilesList();
-
-    $scope.isShowableTag = true;
 
     $scope.sendFileName = function (fileName) {
         $scope.recognizedData = fileName.file.labels;
     }
+
+    
 
     $scope.removeFile = function (item) {
         $scope.fileList.splice(item.$index, 1);

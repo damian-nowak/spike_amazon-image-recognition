@@ -12,32 +12,37 @@
 
 <body ng-app="mainModule"  ng-controller="fileAdd as up">
 
-    <div>
-        <form name="up.upload_form">
-                Single Image with validations
-            <input 
-               type="file" 
-               ngf-select 
-               ng-model="up.file" 
-               name="file" 
-               ngf-pattern="'image/*'"
-               accept="image/*" 
-               ngf-max-size="5MB" 
-               />
-          
-            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-            <i ng-show="up.upload_form.file.$error.maxSize">File too large 
-            {{up.file.size / 1000000|number:1}}MB: max 5M</i>
-            <button type="submit" ng-click="up.submit()">submit</button>
-            <p>{{up.progress}}
-        </form>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">   
+            <form name="up.upload_form">
+                    <h3>Choose file to load...</h3>
+                <input 
+                type="file" 
+                ngf-select 
+                ng-model="up.file" 
+                name="file" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="5MB" 
+                />
+            
+                <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+                {{up.file.size / 1000000|number:1}}MB: max 5M</i>
+                <button type="submit" ng-click="up.submit()">submit</button>
+                <p>{{up.progress}}
+            </form>
+                    <span  ng-if="tmpMessage">waiting for recognition...</span>
+
+        </div>
+    <!--<div ng-if="tmpMessage">-->
+    <!--</div>-->
 
     </div>
 
 
-    <div ng-if="tmpMessage">
-        <span>waiting for recognition...</span>
-    </div>
+    
     <hr>
     <div class="row">
         <div class="col-md-1"></div>
