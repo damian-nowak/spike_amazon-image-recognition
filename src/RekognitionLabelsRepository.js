@@ -10,7 +10,7 @@ if (process.env.DOCKER === 'true') {
   var url = 'mongodb://localhost:27017/RekognitionLabels';
 };
 
-var findAllInDB = () => {
+var getAllLabels = () => {
   return MongoClient.connect(url)
     .then((db) => {
       var searchResult = db.collection('RekognitionLabels').find().toArray();
@@ -26,7 +26,7 @@ var findAllInDB = () => {
     });
 };
 
-var findOneInDB = (file) => {
+var getLabels = (file) => {
   return MongoClient.connect(url)
     .then((db) => {
       var searchResult = db.collection('RekognitionLabels').find({
@@ -44,7 +44,7 @@ var findOneInDB = (file) => {
     });
 };
 
-var findAndDeleteOneInDB = (file) => {
+var deleteLabels = (file) => {
   return MongoClient.connect(url)
     .then((db) => {
       var deleteResult = db.collection('RekognitionLabels').findOneAndDelete({
@@ -62,7 +62,7 @@ var findAndDeleteOneInDB = (file) => {
     });
 };
 
-var insertOneIntoDB = (file, data) => {
+var addLabels = (file, data) => {
   return MongoClient.connect(url)
     .then((db) => {
       var input = db.collection('RekognitionLabels').insertOne({
@@ -81,10 +81,9 @@ var insertOneIntoDB = (file, data) => {
     });
 };
 
-
 module.exports = {
-  findAllInDB,
-  findOneInDB,
-  findAndDeleteOneInDB,
-  insertOneIntoDB
-}
+  getAllLabels,
+  getLabels,
+  deleteLabels,
+  addLabels
+};

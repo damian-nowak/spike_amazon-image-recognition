@@ -1,8 +1,9 @@
 var multer = require('multer');
-var fs = require('fs');
+var fsp = require('fs-promise');
+var path = require('path');
 
-// file upload 
-var dest = __dirname + '/public/images/';
+// file upload via multer
+var dest = path.join(__dirname, '/public/images/');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -11,20 +12,25 @@ var storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
-})
+});
 
 var upload = multer({
   storage: storage
-})
+});
 
-var file_delete = (fileName) => {
-  fs.unlink('./public/images' + fileName, function (err) {
-    if (err) return console.log(err);
-    console.log('file deleted successfully');
-  })
+// removing file via fs-promise
+var fileDelete = (fileName) => {
+  fsp.remove(path.join('./public/images/', fileName))
+    .then((file) => {
+      return file;
+    })
+    .catch((err) => {
+      console.log(err, err.stack);
+      return err;
+    });
 };
 
 module.exports = {
   upload,
-  file_delete
+  fileDelete
 };
