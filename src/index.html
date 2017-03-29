@@ -46,7 +46,7 @@
                 <li ng-click="sendFileName(this);idChecker(this)" class="list-group-item block-center">
                     <a href="">{{ file.fileName }} </a>
                     <span ng-click="removeFile(this)" class='close'>×</span>
-                    <img ng-show="isValidId(this)" class="img-responsive" src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
+                    <img ng-show="isValidId(this)" class="img-responsive" ng-src="/images/{{ file.fileName }}" alt="{{ file.fileName }}">
                 </li>
             </ul>
         </div>
@@ -71,5 +71,4 @@
     <script type="text/javascript" src="/javascripts/ng-file-upload-shim.js"></script>
 
 </body>
-
 </html>
